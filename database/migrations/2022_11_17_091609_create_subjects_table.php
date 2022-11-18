@@ -22,6 +22,7 @@ return new class extends Migration
             $table->date('begin_schedule');
             $table->date('end_schedule');
             $table->integer('album_id');
+            $table->timestamps();
         });
     }
 
