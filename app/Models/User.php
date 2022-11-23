@@ -42,6 +42,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * El nombre del metodo no es al azar, se necesitan:
+     * "SET" establece que se asignará un valor a un atributo
+     * Nombre del atributo a modificar
+     * palabra "Attribute"
+     */
+    public function setPasswordAttribute($value){
+        $this->attributes['password'] = bcrypt($value);
+    }
+
     public function subjects()
     {
         return $this->hasMany(Subject::class);

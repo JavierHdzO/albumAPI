@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\authController;
+use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +19,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::resource('user', \App\Http\Controllers\UserController::class)->middleware('auth');
+Route::get('authentication/logout', [authController::class, 'logout']);
+Route::post('authentication/login', [authController::class, 'login']);
+Route::resource('authentication',\App\Http\Controllers\authController::class)->only(['store', 'login', 'logout']);
