@@ -19,3 +19,4 @@ class Subject extends Model
         $this->hasMany(Subject::class);
     }
 }
+

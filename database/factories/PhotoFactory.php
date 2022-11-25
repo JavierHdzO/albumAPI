@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Subject;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,14 @@ class PhotoFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'id' => $this->faker->unique()->randomNumber(),
+            'url' => $this->faker->imageUrl(),
+            'type' => $this->faker->randomElement(['image']),
+            'status' => $this->faker->randomElement(['active']),
+            'schedule' => $this->faker->date(),
+            'subject_id' => (Subject::factory())->create(),
+            'created_at' => $this->faker->dateTime(),
+            'updated_at' => $this->faker->dateTime(),
         ];
     }
 }

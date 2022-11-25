@@ -24,3 +24,6 @@ Route::resource('user', \App\Http\Controllers\UserController::class)->middleware
 Route::get('authentication/logout', [authController::class, 'logout']);
 Route::post('authentication/login', [authController::class, 'login']);
 Route::resource('authentication',\App\Http\Controllers\authController::class)->only(['store', 'login', 'logout']);
+
+//Photos
+Route::resource('photos', \App\Http\Controllers\PhotoController::class)->middleware('auth');

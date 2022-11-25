@@ -25,7 +25,7 @@ class PhotoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $request->all();
     }
 
     /**
@@ -60,5 +60,23 @@ class PhotoController extends Controller
     public function destroy(Photo $photo)
     {
         //
+    }
+
+    /**
+     * Upload a photo
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function upload(Request $request){
+        $request->validate([
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+        $imageName = time().'.'.$request->photo->extension();  
+        $request->photo->move(public_path('images'), $imageName);
+        return response()->json([
+            'message' => 'Photo uploaded successfully',
+            'photo' => $imageName
+        ]);
     }
 }
