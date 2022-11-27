@@ -44,7 +44,8 @@ class Kernel extends HttpKernel
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\ForceJsonResponse::class,
-            'json:api'
+            'json:api',
+            'checkKey:api'
         ],
     ];
 
@@ -67,5 +68,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'json' => \App\Http\Middleware\ForceJsonResponse::class,
+        'checkKey' =>  \App\Http\Middleware\checkKey::class
     ];
 }

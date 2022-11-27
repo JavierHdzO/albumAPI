@@ -27,7 +27,7 @@ class registerRequest extends FormRequest
         return [
             //reglas para validar los campos que llegan del request
             "name" => "required | min:3",
-            "email" => "required | unique:users,email",
+            "email" => "required|unique:users,email|email",
             "password" => "required | min:8",
             "passwordConfirmed" => "required | same:password"
         ];

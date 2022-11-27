@@ -19,8 +19,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+//protected routes
+Route::resource('user', \App\Http\Controllers\UserController::class)->middleware('checkKey');
 
-Route::resource('user', \App\Http\Controllers\UserController::class)->middleware('auth');
+//need to fix auth on logout
 Route::get('authentication/logout', [authController::class, 'logout']);
 Route::post('authentication/login', [authController::class, 'login']);
 Route::resource('authentication',\App\Http\Controllers\authController::class)->only(['store', 'login', 'logout']);
