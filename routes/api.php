@@ -21,6 +21,7 @@ use \App\Http\Middleware\checkKey;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
 //protected routes
 Route::middleware(checkKey::class)->group(function(){
     Route::resource('user', \App\Http\Controllers\UserController::class);
@@ -31,3 +32,5 @@ Route::middleware(checkKey::class)->group(function(){
 
 Route::post('authentication/register',[authController::class, 'store']);
 Route::post('authentication/login', [authController::class, 'login']);
+
+Route::apiResource('photos', '\App\Http\Controllers\PhotoController');
