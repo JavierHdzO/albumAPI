@@ -21,7 +21,7 @@ class checkKey
         if(!$key){
             return response()->json([
                 'success' => false,
-                'message' => 'Inicie sesión'
+                'message' => 'Inicie sesión EJECUTADO'
             ]);
         }
         // return response()->json(['1' => $key]);
@@ -36,7 +36,7 @@ class checkKey
             ]);
         }
         // return response()->json(['1' => $userHasKey, '2'=>$key, '3'=>$idUser] );
-        $request->headers->add(["key" => $key, "idUser"=>$idUser]);
+        // $request->headers->add(["key" => $key, "idUser"=>$idUser]);
         return $next($request);
     }
 }
