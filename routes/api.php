@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\authController;
+use App\Http\Controllers\PhotoController;
 use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -33,4 +34,4 @@ Route::middleware(checkKey::class)->group(function(){
 Route::post('authentication/register',[authController::class, 'store']);
 Route::post('authentication/login', [authController::class, 'login']);
 
-Route::apiResource('photos', '\App\Http\Controllers\PhotoController');
+Route::resource('photos', PhotoController::class);

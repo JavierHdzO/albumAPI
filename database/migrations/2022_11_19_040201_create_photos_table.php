@@ -21,7 +21,8 @@ return new class extends Migration
             $table->date('schedule')->nullable();
             $table->foreignId('subject_id')->constrained()
                     ->onDelete('cascade')
-                    ->onUpdate('cascade');   
+                    ->onUpdate('cascade');
+            
             $table->timestamps();
         });
     }
