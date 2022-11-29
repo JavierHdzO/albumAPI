@@ -14,7 +14,16 @@ class PhotoController extends Controller
      */
     public function index()
     {
-        
+      $paginate = Photo::paginate(10);
+      
+      return response()->json([
+        'status' => 'success',
+        'data' => [
+            'total' => $paginate->total(),
+            'photos' => $paginate->items(),
+            'next_url' => $paginate->nextPageUrl()
+        ]
+      ]);
     }
 
     /**
@@ -25,7 +34,19 @@ class PhotoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $photo = $request->file('photo');
+
+        if(!$photo){
+            return response()->json([
+                'status'=> 'Error',
+                'data' => [
+                    'message' => 'Image not found'
+                ]
+            ]);
+        }
+
+        $photo->store('images');
+        return 'ok';
     }
 
     /**
