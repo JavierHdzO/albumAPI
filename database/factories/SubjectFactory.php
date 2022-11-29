@@ -17,7 +17,15 @@ class SubjectFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => fake()->name,
+            'grade' => fake()->numberBetween(1, 12),
+            'group'=> 'G',
+            'professor' => fake()->name,
+            'start_scheule' => fake()->date(),
+            'end_schedule' => fake()->date(),
+            'user_id' => 1
+
+        
         ];
     }
 }
