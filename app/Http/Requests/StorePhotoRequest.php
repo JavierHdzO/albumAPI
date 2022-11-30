@@ -4,8 +4,6 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-use Illuminate\Validation\Rules\File;
-
 class StorePhotoRequest extends FormRequest
 {
     /**
@@ -43,6 +41,10 @@ class StorePhotoRequest extends FormRequest
                 'nullable',
                 'date_format:Y-m-d H:i:s'
             ],
+            'subject' => [
+                'required',
+                'numeric'
+            ]
             
 
         ];

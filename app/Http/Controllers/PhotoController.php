@@ -90,7 +90,16 @@ class PhotoController extends Controller
      */
     public function show(Photo $photo)
     {
-        //
+        return response()->json([
+            'status' => 'success',
+            'data' => [
+                'photo' => $photo
+            ]
+        ],
+        200,
+        [],
+        JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT
+        );
     }
 
     /**
@@ -101,7 +110,7 @@ class PhotoController extends Controller
      */
     public function edit(Photo $photo)
     {
-        //
+        
     }
 
     /**
@@ -113,7 +122,23 @@ class PhotoController extends Controller
      */
     public function update(UpdatePhotoRequest $request, Photo $photo)
     {
-        //
+
+        $photo->update([
+            'type' => $request->type,
+            'status' => $request->status,
+            'schedule' => $request->schedule
+        ]);
+
+        return response()->json([
+                'status' => 'success',
+                'data' => [
+                    'photo' => $photo
+                ]
+            ],
+            200,
+            [],
+            JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT
+        );
     }
 
     /**
@@ -124,6 +149,32 @@ class PhotoController extends Controller
      */
     public function destroy(Photo $photo)
     {
-        //
+
+        if($photo == null){
+            return response()->json([
+                'status' => 'Error',
+                'message' => 'Photo not found'
+            ]);
+        }
+
+        $secure_id = $photo->url;
+        $secure_id = explode('/', $secure_id);
+        $keyImage = $secure_id[count($secure_id) - 1];
+        $keyImage = explode('.', $keyImage);
+        $keyImage = $keyImage[0];
+
+        cloudinary()->destroy($keyImage);
+       
+        $photo->delete();
+        return response()->json([
+            'status' => 'success',
+            'data'=>[
+                'photo' => $photo
+            ]
+        ],
+        200,
+        [],
+        JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT
+        );
     }
 }
