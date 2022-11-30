@@ -29,9 +29,9 @@ Route::middleware(checkKey::class)->group(function(){
     Route::get('userAlbum/{user}', [UserController::class, 'getAlbums']);
     Route::get('userAlbum/{album}/{user}', [UserController::class, 'getAlbum']);
     Route::get('authentication/logout', [authController::class, 'logout']);
+    Route::resource('photos', PhotoController::class);
 });
 
 Route::post('authentication/register',[authController::class, 'store']);
 Route::post('authentication/login', [authController::class, 'login']);
 
-Route::resource('photos', PhotoController::class);
