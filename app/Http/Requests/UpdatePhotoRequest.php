@@ -24,7 +24,30 @@ class UpdatePhotoRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'type' => [
+                'nullable',
+                'string'
+            ],
+            'status' => [
+                'nullable',
+                'string'
+            ],
+            'schedule' => [
+                'nullable',
+                'date',
+                'date_format:Y-m-d H:i:s'
+            ]
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, mixed>
+     */
+    public function messages(){
+        return [
+            'type.string' => 'Type must be a string',
         ];
     }
 }

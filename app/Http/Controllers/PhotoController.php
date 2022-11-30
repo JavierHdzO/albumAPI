@@ -110,7 +110,7 @@ class PhotoController extends Controller
      */
     public function edit(Photo $photo)
     {
-        //
+        
     }
 
     /**
@@ -122,7 +122,23 @@ class PhotoController extends Controller
      */
     public function update(UpdatePhotoRequest $request, Photo $photo)
     {
-        //
+
+        $photo->update([
+            'type' => $request->type,
+            'status' => $request->status,
+            'schedule' => $request->schedule
+        ]);
+
+        return response()->json([
+            'status' => 'success',
+            'data' => [
+                'photo' => $photo
+            ]
+        ],
+        200,
+        [],
+        JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT
+        );
     }
 
     /**

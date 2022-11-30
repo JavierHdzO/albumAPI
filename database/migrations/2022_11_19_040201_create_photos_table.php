@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('url');
             $table->string('type');
             $table->string('status')->nullable();
-            $table->date('schedule')->nullable();
+            $table->dateTime('schedule')->nullable();
             $table->foreignId('subject_id')->constrained()
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
