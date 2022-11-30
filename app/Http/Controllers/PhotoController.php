@@ -130,14 +130,14 @@ class PhotoController extends Controller
         ]);
 
         return response()->json([
-            'status' => 'success',
-            'data' => [
-                'photo' => $photo
-            ]
-        ],
-        200,
-        [],
-        JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT
+                'status' => 'success',
+                'data' => [
+                    'photo' => $photo
+                ]
+            ],
+            200,
+            [],
+            JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT
         );
     }
 
