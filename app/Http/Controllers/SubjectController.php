@@ -1,7 +1,6 @@
 <?php
-
 namespace App\Http\Controllers;
-
+use App\Models\User;
 use App\Models\Photo;
 use App\Models\Subject;
 use Illuminate\Http\Request;
@@ -15,7 +14,6 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        //
         $paginate = Subject::paginate(5);
         return response()->json([
             'status' => 'success',
@@ -38,11 +36,16 @@ class SubjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function register(Request $request, $userID)
+    public function register(Request $request, /* $userID */)
     {
         // Registra un nuevo subject
         try {
-            $subject = new subject();
+            
+            // Obtener ID por el token de autenticacion
+            $userID = User::select('id')->where('key', explode(' ',$request->header('Authorization'))[1])->get()->first()['id'];
+
+            // Generar nuevo subject
+            $subject = new Subject();
             $subject->name = $request->name;
             $subject->grade = $request->grade;
             $subject->group = $request->group;
