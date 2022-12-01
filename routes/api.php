@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\authController;
 use App\Http\Controllers\PhotoController;
+use App\Http\Controllers\SubjectController;
 use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,10 +27,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //protected routes
 Route::middleware(checkKey::class)->group(function(){
     Route::resource('user', \App\Http\Controllers\UserController::class);
+    Route::resource('subject', \App\Http\Controllers\SubjectController::class);
+    Route::resource('photos', PhotoController::class);
     Route::get('userAlbum/{user}', [UserController::class, 'getAlbums']);
     Route::get('userAlbum/{album}/{user}', [UserController::class, 'getAlbum']);
     Route::get('authentication/logout', [authController::class, 'logout']);
-    Route::resource('photos', PhotoController::class);
+    Route::get('subjects', [SubjectController::class, 'index']);
 });
 
 Route::post('authentication/register',[authController::class, 'store']);

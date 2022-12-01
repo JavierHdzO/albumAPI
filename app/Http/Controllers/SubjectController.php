@@ -15,6 +15,20 @@ class SubjectController extends Controller
     public function index()
     {
         //
+        $paginate = Subject::paginate(5);
+        return response()->json([
+            'status' => 'success',
+            'data'  => [
+                'total' => $paginate->total(),
+                'subjects' => $paginate->items(),
+                'next_page' => $paginate->nextPageUrl()
+            ]
+            ],
+            200,
+            [],
+            JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT
+        
+        );
     }
 
     /**
