@@ -27,12 +27,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //protected routes
 Route::middleware(checkKey::class)->group(function(){
     Route::resource('user', \App\Http\Controllers\UserController::class);
-    Route::resource('subject', \App\Http\Controllers\SubjectController::class);
+    Route::apiResource('subject', SubjectController::class);
     Route::resource('photos', PhotoController::class);
     Route::get('userAlbum/{user}', [UserController::class, 'getAlbums']);
     Route::get('userAlbum/{album}/{user}', [UserController::class, 'getAlbum']);
     Route::get('authentication/logout', [authController::class, 'logout']);
     Route::get('subjects', [SubjectController::class, 'index']);
+    Route::post('subject/{user}', [SubjectController::class, 'register']);
+    Route::put('subject/{user}', [SubjectController::class, 'show']);
+    Route::patch('subject/{subject}', [SubjectController::class, 'update']);
+    Route::delete('subject/{subject}', [SubjectController::class, 'destroy']);
 });
 
 Route::post('authentication/register',[authController::class, 'store']);
