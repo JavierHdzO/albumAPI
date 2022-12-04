@@ -52,6 +52,12 @@ class authController extends Controller
                 '1' => $request->password
             ]);
         }
+        // Nota del profesor:
+        // Validar que el token no se repita (que sea único)
+        // Opcional
+        // HSA - MD5 (Alternativas)[HASH-TOKENS]
+        // Se les conoce como gestores de llaves
+
         //trae el id del usuario y genera una key para protección de rutas.
         $userID = User::select('id')->where('email', $request->email)->get()->first()['id'];
         $key = $userID . "|" . Str::random(20);

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class SubjectFactory extends Factory
 {
+
     /**
      * Define the model's default state.
      *
@@ -16,16 +17,15 @@ class SubjectFactory extends Factory
      */
     public function definition()
     {
+        $algo = ['A','B','C','D'];
         return [
             'name' => fake()->name,
             'grade' => fake()->numberBetween(1, 12),
-            'group'=> 'G',
+            'group'=> $algo[fake()->numberBetween(0, 3)],
             'professor' => fake()->name,
             'start_scheule' => fake()->date(),
             'end_schedule' => fake()->date(),
-            'user_id' => 1
-
-        
+            'user_id' => fake()->numberBetween(1, 5)
         ];
     }
 }
