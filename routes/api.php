@@ -36,7 +36,7 @@ Route::middleware(checkKey::class)->group(function(){
 
     // Album routes
     Route::post('subject/register', [SubjectController::class, 'register']);
-    Route::put('subject/{user}', [SubjectController::class, 'show']);
+    Route::get('subject/{user}', [SubjectController::class, 'show']);
     Route::patch('subject/{subject}', [SubjectController::class, 'update']);
     Route::delete('subject/{subject}', [SubjectController::class, 'destroy']);
 });
